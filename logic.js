@@ -58,7 +58,7 @@ function result() {
     }
     if (count == 0 && !(OP.includes(global_expression.slice(-1))) && global_expression != "") {
         // global_expression = "hello world!"
-        updateExpression("")
+        // updateExpression("")
         printTable( (new Expression(global_expression)).table )
     }
 }
@@ -81,46 +81,12 @@ class Expression {
     tree
     table
 
-    constructor(str) {
-        this.tree = buildTree(str)
-        this.table = truthTable(str, this.tree)
+    constructor(expression) {
+        this.tree = buildTree(expression)
+        this.table = truthTable(expression, this.tree)
     }
 }
 
-function truthTable(str, tree) /* console.log */ {
-    var matrix = []
-    
-    let variables = findVariables(str)
-
-    let line = 0
-
-    console.log(tree)
-
-    for (let i = (2**variables.length)-1; i >= 0 ; i--) {
-        matrix.push([])
-
-        let entries = {}
-        let bin = i.toString(2).padStart(variables.length, "0");
-    
-        for (let j = 0; j < variables.length; j++) {
-            assigned_value = bin[j] === "1";
-
-            entries[variables[j]] = assigned_value;
-            matrix[line].push(assigned_value);
-        }
-
-        matrix[line].push(solve(tree, entries))
-        line++
-    }
-
-    matrix.unshift([])
-    for (let i = 0; i < variables.length; i++) {
-        matrix[0].push(variables[i])
-    }
-    matrix[0].push(expressionToString(str))
-
-    return matrix
-}
 
 function order(op) {
     if (op == "¬") return 2
@@ -196,7 +162,6 @@ function sliceParentesis(expression) {
     return expression
 }
 
-// função insana
 function buildTree(expression) /* retorna o nó da raiz */ {
     expression = sliceParentesis(expression)
     
@@ -204,26 +169,16 @@ function buildTree(expression) /* retorna o nó da raiz */ {
         return new Node(expression, null, null)
     }
 
-    let index = findRoot(expression)
+    let rootIndex = findRoot(expression)
 
-    let right_side = buildTree(expression.slice(index+1))
+    let right_side = buildTree(expression.slice(rootIndex+1))
 
-    if (expression[index] == "¬") { // not
-        return new Node(expression[index], null, right_side)
+    if (expression[rootIndex] == "¬") { // not
+        return new Node(expression[rootIndex], null, right_side)
     } else { //qualquer outra op
-        let left_side = buildTree(expression.slice(0, index))
-        return new Node(expression[index], left_side, right_side)
+        let left_side = buildTree(expression.slice(0, rootIndex))
+        return new Node(expression[rootIndex], left_side, right_side)
     }
-}
-
-function findStart(start, expression) {
-    while (expression[start] != "(" && start >= 0) {start--}
-    return start + 1
-}
-
-function findEnd(end, expression) {
-    while (expression[end] != ")" && end <= expression.length) {end++}
-    return end
 }
 
 
@@ -231,10 +186,6 @@ function findEnd(end, expression) {
 /* ETAPA III */
 
 
-
-function findVariables(expression) {
-    return Array.from(new Set(expression.match(/[A-Z]/g)))
-}
 
 function solve(tree, entries) /* retorna a boolean da expressão */ {
     if (!(OP.includes(tree.value))) {
@@ -260,6 +211,45 @@ function solve(tree, entries) /* retorna a boolean da expressão */ {
     }
 }
 
+function findVariables(expression) {
+    return Array.from(new Set(expression.match(/[A-Z]/g)))
+}
+
+function truthTable(expression, tree) /* console.log */ {
+    var matrix = []
+    
+    let variables = findVariables(expression)
+
+    let line = 0
+
+    console.log(tree)
+
+    for (let i = (2**variables.length)-1; i >= 0 ; i--) {
+        matrix.push([])
+
+        let entries = {}
+        let bin = i.toString(2).padStart(variables.length, "0");
+    
+        for (let j = 0; j < variables.length; j++) {
+            assigned_value = bin[j] === "1";
+
+            entries[variables[j]] = assigned_value;
+            matrix[line].push(assigned_value);
+        }
+
+        matrix[line].push(solve(tree, entries))
+        line++
+    }
+
+    matrix.unshift([])
+    for (let i = 0; i < variables.length; i++) {
+        matrix[0].push(variables[i])
+    }
+    matrix[0].push(expressionToString(expression))
+
+    return matrix
+}
+
 function printTable(m) {
     for (let i = 0; i < m.length; i++) {
         for (let j = 0; j < m[i].length; j++) {
@@ -269,5 +259,3 @@ function printTable(m) {
         document.write("<br>")
     }
 }
-
-
