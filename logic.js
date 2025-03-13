@@ -118,6 +118,8 @@ function findRoot(expression) /* retorna index da raiz */ {
     return rootIndex
 }
 
+
+// função insana
 function buildTree(expression) /* retorna o nó da raiz */ {
     if (expression[0] == "(" && expression.slice(-1) == ")" ) {
         expression = expression.slice(1, -1)
@@ -175,7 +177,7 @@ function findEnd(end, expression) {
 
 
 
-function findEntries(expression) {
+function findVariables(expression) {
     return Array.from(new Set(expression.match(/[A-Z]/g)))
 }
 
@@ -206,7 +208,7 @@ function solve(tree, entries) /* retorna a boolean da expressão */ {
 function truthTable() /* console.log */ {
     var matrix = []
     
-    let variables = findEntries(global_expression)
+    let variables = findVariables(global_expression)
 
     let line = 0
     

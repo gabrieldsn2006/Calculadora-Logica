@@ -12,6 +12,8 @@
     position: relative;
 }
 
+/* INPUT */
+
 div#content {
     position: absolute;
 
@@ -41,3 +43,19 @@ input[type="button"] {
     margin-bottom: 10px;
 }
 
+/* TABLE */
+
+#table {
+    display: none;
+}
+
+table {
+    border-collapse: collapse;
+    width: 50%;
+    margin: 20px;
+}
+th, td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
