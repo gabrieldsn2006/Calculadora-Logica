@@ -6,7 +6,7 @@ OP = ["¬","∧","∨","→","↔"]
 global_expression = ""
 
 function expressionToString(expression) {
-    return global_expression.replace(/1/g, "true").replace(/0/g, "false")
+    return expression.replace(/1/g, "true").replace(/0/g, "false")
 }
 
 function updateExpression(str) {
@@ -59,7 +59,8 @@ function result() {
     if (count == 0 && !(OP.includes(global_expression.slice(-1))) && global_expression != "") {
         // global_expression = "hello world!"
         updateExpression("")
-        printTable(truthTable())
+        printTable( (new Expression(global_expression)).table )
+        // printTable(truthTable())
     }
 }
 
@@ -77,6 +78,53 @@ class Node {
     }
 }
 
+class Expression {
+    tree
+    table
+
+    constructor(str) {
+        this.tree = buildTree(str)
+        this.table = truthTable(str, this.tree)
+    }
+}
+
+function truthTable(str, tree) /* console.log */ {
+    var matrix = []
+    
+    let variables = findVariables(str)
+
+    let line = 0
+
+    console.log(tree)
+
+    for (let i = (2**variables.length)-1; i >= 0 ; i--) {
+        matrix.push([])
+
+        let entries = {}
+        let bin = i.toString(2).padStart(variables.length, "0");
+    
+        for (let j = 0; j < variables.length; j++) {
+            assigned_value = bin[j] === "1";
+
+            entries[variables[j]] = assigned_value;
+            matrix[line].push(assigned_value);
+        }
+
+        matrix[line].push(solve(tree, entries))
+        line++
+    }
+
+    matrix.unshift([])
+    for (let i = 0; i < variables.length; i++) {
+        matrix[0].push(variables[i])
+    }
+    matrix[0].push(expressionToString(str))
+
+    return matrix
+}
+
+
+
 function order(op) {
     if (op == "¬") return 2
     if (op == "∧" || op == "∨") return 1
@@ -89,7 +137,6 @@ function findRoot(expression) /* retorna index da raiz */ {
     let scope = 0
     let rootScope = -1
     let rootIndex = -1
-    
 
     for (let i = 0; i < expression.length; i++) {
         if (expression[i] == "(") {
@@ -119,44 +166,55 @@ function findRoot(expression) /* retorna index da raiz */ {
 }
 
 
+function sliceParentesis(expression) {
+    let index = findRoot(expression)
+
+    if (index == -1) {
+        for (let i = 0; i < expression.length; i++) {
+            if (VAL.includes(expression[i])) {
+                index = i
+                break
+            }
+        }
+    }
+
+    let unsolvedLeft = 0
+    for (let i = index-1; i >= 0; i--) {
+        if (expression[i] == "(") unsolvedLeft++
+        if (expression[i] == ")") unsolvedLeft--
+    }
+
+    let unsolvedRight = 0
+    for (let i = index+1; i < expression.length; i++) {
+        if (expression[i] == "(") unsolvedRight--
+        if (expression[i] == ")") unsolvedRight++
+    }
+
+    while (unsolvedLeft > 0 && unsolvedRight > 0) {
+        expression = expression.slice(1, -1)
+        unsolvedLeft--
+        unsolvedRight--
+    }
+
+    return expression
+}
+
 // função insana
 function buildTree(expression) /* retorna o nó da raiz */ {
-    if (expression[0] == "(" && expression.slice(-1) == ")" ) {
-        expression = expression.slice(1, -1)
-    } // talvez isso tenho simplificado um problema que já tinha resolvido com gambiarra (ou seja o código pode ser simplificado em algum ponto)
+    expression = sliceParentesis(expression)
     
     if (VAL.includes(expression)) {
         return new Node(expression, null, null)
     }
 
-    var left_side, right_side
-
     let index = findRoot(expression)
-    
+
+    let right_side = buildTree(expression.slice(index+1))
+
     if (expression[index] == "¬") { // not
-        let end = findEnd(index, expression)
-        if (expression[index+1] == "(") {
-            right_side = buildTree(expression.slice(index+2, end))
-        } else {
-            right_side = buildTree(expression.slice(index+1, end))
-        }
         return new Node(expression[index], null, right_side)
     } else { //qualquer outra op
-
-        let start = findStart(index, expression)
-        if (expression[index-1] == ")") {
-            left_side = buildTree(expression.slice(start, index-1))
-        } else {
-            left_side = buildTree(expression.slice(start, index))
-        }
-
-        let end = findEnd(index, expression)
-        if (expression[index+1] == "(") {
-            right_side = buildTree(expression.slice(index+2, end))
-        } else {
-            right_side = buildTree(expression.slice(index+1, end))
-        }
-
+        let left_side = buildTree(expression.slice(0, index))
         return new Node(expression[index], left_side, right_side)
     }
 }
@@ -203,43 +261,6 @@ function solve(tree, entries) /* retorna a boolean da expressão */ {
     if (tree.value == "↔") {
         return (solve(tree.left, entries) == solve(tree.right, entries))
     }
-}
-
-function truthTable() /* console.log */ {
-    var matrix = []
-    
-    let variables = findVariables(global_expression)
-
-    let line = 0
-    
-    let tree = buildTree(global_expression)
-
-    console.log(tree)
-
-    for (let i = (2**variables.length)-1; i >= 0 ; i--) {
-        matrix.push([])
-
-        let entries = {}
-        let bin = i.toString(2).padStart(variables.length, "0");
-    
-        for (let j = 0; j < variables.length; j++) {
-            assigned_value = bin[j] === "1";
-
-            entries[variables[j]] = assigned_value;
-            matrix[line].push(assigned_value);
-        }
-
-        matrix[line].push(solve(tree, entries))
-        line++
-    }
-
-    matrix.unshift([])
-    for (let i = 0; i < variables.length; i++) {
-        matrix[0].push(variables[i])
-    }
-    matrix[0].push(expressionToString(global_expression))
-
-    return matrix
 }
 
 function printTable(m) {
