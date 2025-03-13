@@ -11,7 +11,7 @@
         <div id="container">
             <div id="content">
 
-                <div id="calculadora">
+                <div id="calculadora" class="item">
                     <p id="label"></p>
                     <div>
                         <input type="button" value="A" onclick="addValue(value)">
@@ -50,7 +50,7 @@
                         <input type="button" value="R" onclick="addValue(value)">
                         <input type="button" value="S" onclick="addValue(value)">
                         <input type="button" value="T" onclick="addValue(value)">
-                    
+                
                         <input type="button" value="∧" onclick="addOperation(value)">
                         <input type="button" value="∨" onclick="addOperation(value)">
                     </div>
@@ -68,12 +68,10 @@
                     </div>
                 </div>
 
-                <div id="table">
-
-                    <table id="table_content">
-                        
+                <div id="table" class="item">
+                    <table>
+                        <p id="table_content">insira uma expressão</p>
                     </table>
-
                 </div>
 
             </div>

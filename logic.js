@@ -43,13 +43,15 @@ function addParentesis(value) {
 function clr() {
     global_expression = ""
     updateExpression("")
-    document.getElementById("table_content").innerHTML = ""
+    document.getElementById("table_content").innerHTML = "insira uma expressão"
+    hideTable()
 }
 
 function del() {
     global_expression = global_expression.slice(0, -1)
     updateExpression("")
-    document.getElementById("table_content").innerHTML = ""
+    document.getElementById("table_content").innerHTML = "insira uma expressão"
+    hideTable()
 }
 
 function result() {
@@ -62,6 +64,7 @@ function result() {
         // global_expression = "hello world!"
         // updateExpression("")
         printTable( (new Expression(global_expression)).table )
+        displayTable()
     }
 }
 
@@ -249,24 +252,23 @@ function truthTable(expression, tree) { /* retorna matriz que representa a tabel
     return matrix
 }
 
-// function printTable(m) { /* debug */
-//     for (let i = 0; i < m.length; i++) {
-//         for (let j = 0; j < m[i].length; j++) {
-//             document.write(m[i][j])
-//             document.write(" | ")
-//         }
-//         document.write("<br>")
-//     }
-// }
-
-
-
 /* FRONT-END TABLE */
 /* table_content */
 
+function displayTable() {
+    let item = document.getElementById("table")
+    item.style.display = "block"
+}
+
+function hideTable() {
+    let item = document.getElementById("table")
+    item.style.display = "none"
+}
+
 function printTable(m) {
     let tableTag = document.getElementById("table_content")
-    
+    tableTag.innerHTML = ""
+
     for (let i = 0; i < m.length; i++) {
         for (let j = 0; j < m[i].length; j++) {
             tableTag.innerHTML += `${m[i][j]}`

@@ -20,6 +20,8 @@ div#content {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
+    display: flex;
 }
 
 #content div {
@@ -32,7 +34,7 @@ input[type="button"] {
     padding: 5px;
 }
 
-#container p {
+#calculadora p {
     height: 20px;
     background: lightgray;
     padding: 10px;
@@ -51,7 +53,7 @@ input[type="button"] {
 #table {
     border: 1px solid black;
     padding: 5px;
-    /* display: none; */
+    display: none;
 }
 
 table {
@@ -62,4 +64,8 @@ th, td {
     border: 1px solid black;
     padding: 10px;
     text-align: center;
+}
+
+.item {
+    flex: auto;
 }
