@@ -60,7 +60,6 @@ function result() {
         // global_expression = "hello world!"
         updateExpression("")
         printTable( (new Expression(global_expression)).table )
-        // printTable(truthTable())
     }
 }
 
@@ -122,8 +121,6 @@ function truthTable(str, tree) /* console.log */ {
 
     return matrix
 }
-
-
 
 function order(op) {
     if (op == "¬") return 2
