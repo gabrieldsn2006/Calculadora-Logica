@@ -120,7 +120,7 @@ function findRoot(expression) { /* retorna index da raiz (ultima operação a se
                     rootScope = scope
                     rootIndex = i
                 } else if (scope == rootScope) {
-                    if (order(expression[i]) < order(expression[rootIndex])) {
+                    if (order(expression[i]) <= order(expression[rootIndex])) {
                         rootScope = scope
                         rootIndex = i
                     }
