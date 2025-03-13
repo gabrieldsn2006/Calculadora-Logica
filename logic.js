@@ -43,11 +43,13 @@ function addParentesis(value) {
 function clr() {
     global_expression = ""
     updateExpression("")
+    document.getElementById("table_content").innerHTML = ""
 }
 
 function del() {
     global_expression = global_expression.slice(0, -1)
     updateExpression("")
+    document.getElementById("table_content").innerHTML = ""
 }
 
 function result() {
@@ -247,12 +249,29 @@ function truthTable(expression, tree) { /* retorna matriz que representa a tabel
     return matrix
 }
 
-function printTable(m) { /* debug */
+// function printTable(m) { /* debug */
+//     for (let i = 0; i < m.length; i++) {
+//         for (let j = 0; j < m[i].length; j++) {
+//             document.write(m[i][j])
+//             document.write(" | ")
+//         }
+//         document.write("<br>")
+//     }
+// }
+
+
+
+/* FRONT-END TABLE */
+/* table_content */
+
+function printTable(m) {
+    let tableTag = document.getElementById("table_content")
+    
     for (let i = 0; i < m.length; i++) {
         for (let j = 0; j < m[i].length; j++) {
-            document.write(m[i][j])
-            document.write(" | ")
+            tableTag.innerHTML += `${m[i][j]}`
+            tableTag.innerHTML += " | "
         }
-        document.write("<br>")
+        tableTag.innerHTML += "<br>"
     }
 }
