@@ -87,15 +87,13 @@ class Expression {
     }
 }
 
-
-function order(op) {
+function order(op) { /* retorna um valor de prioridade (comparar para saber qual resolver por último) */
     if (op == "¬") return 2
     if (op == "∧" || op == "∨") return 1
     if (op == "→" || op == "↔") return 0
 }
 
-function findRoot(expression) /* retorna index da raiz */ {
-    // procuro a ultima operação a ser realizada
+function findRoot(expression) { /* retorna index da raiz (ultima operação a ser realizada) */
     
     let scope = 0
     let rootScope = -1
@@ -128,8 +126,7 @@ function findRoot(expression) /* retorna index da raiz */ {
     return rootIndex
 }
 
-
-function sliceParentesis(expression) {
+function sliceParentesis(expression) { /* retorna expressão sem o parentesis mais externo se possível (talvez possa ser otimizada) */
     let index = findRoot(expression)
 
     if (index == -1) {
@@ -162,7 +159,7 @@ function sliceParentesis(expression) {
     return expression
 }
 
-function buildTree(expression) /* retorna o nó da raiz */ {
+function buildTree(expression) { /* retorna o Node raiz (arvore) */ 
     expression = sliceParentesis(expression)
     
     if (VAL.includes(expression)) {
@@ -175,7 +172,7 @@ function buildTree(expression) /* retorna o nó da raiz */ {
 
     if (expression[rootIndex] == "¬") { // not
         return new Node(expression[rootIndex], null, right_side)
-    } else { //qualquer outra op
+    } else { // qualquer outra op
         let left_side = buildTree(expression.slice(0, rootIndex))
         return new Node(expression[rootIndex], left_side, right_side)
     }
@@ -187,7 +184,7 @@ function buildTree(expression) /* retorna o nó da raiz */ {
 
 
 
-function solve(tree, entries) /* retorna a boolean da expressão */ {
+function solve(tree, entries) { /* retorna a boolean da expressão para um conjunto de entradas */ 
     if (!(OP.includes(tree.value))) {
         if (tree.value == "1") return true
         if (tree.value == "0") return false
@@ -211,11 +208,11 @@ function solve(tree, entries) /* retorna a boolean da expressão */ {
     }
 }
 
-function findVariables(expression) {
+function findVariables(expression) { /* retorna um array com as variáveis da expressão */
     return Array.from(new Set(expression.match(/[A-Z]/g)))
 }
 
-function truthTable(expression, tree) /* console.log */ {
+function truthTable(expression, tree) { /* retorna matriz que representa a tabela-verdade */ 
     var matrix = []
     
     let variables = findVariables(expression)
@@ -250,7 +247,7 @@ function truthTable(expression, tree) /* console.log */ {
     return matrix
 }
 
-function printTable(m) {
+function printTable(m) { /* debug */
     for (let i = 0; i < m.length; i++) {
         for (let j = 0; j < m[i].length; j++) {
             document.write(m[i][j])
