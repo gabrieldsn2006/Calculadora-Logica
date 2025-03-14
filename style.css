@@ -35,7 +35,7 @@ input[type="button"] {
     width: 50px;
     padding: 5px;
     background: rgb(255, 230, 230);
-    /* border-radius: 5px; */
+    border-radius: 5px;
 }
 
 #true_button {
@@ -95,7 +95,7 @@ input[type="button"] {
     display: inline-block;
     border: 1px solid black;
     padding: 5px;
-    /* border-radius: 10px; */
+    border-radius: 10px;
 }
 
 #table {
@@ -105,8 +105,12 @@ input[type="button"] {
     border: 1px solid black;
     padding: 5px;
     display: none;
-    /* border-radius: 10px; */
+    border-radius: 10px;
     overflow: scroll;
+}
+
+#table::-webkit-scrollbar {
+    display: none;
 }
 
 table {
