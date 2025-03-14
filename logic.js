@@ -18,12 +18,14 @@ function addValue(value) {
     if (global_expression != "") {
         if (OP.includes(global_expression.slice(-1)) || global_expression.slice(-1) == "(") updateExpression(value)
     } else updateExpression(value)
+    hideTable()
 }
 
 function addOperation(value) {   
     if (value == "¬") {
         if (global_expression.slice(-1) == "(" || (OP.includes(global_expression.slice(-1)) && global_expression.slice(-1) != "¬") || global_expression == "") updateExpression(value)
     } else if (global_expression.slice(-1) == ")" || VAL.includes(global_expression.slice(-1))) updateExpression(value)
+    hideTable()
 }
 
 function addParentesis(value) {
@@ -38,19 +40,18 @@ function addParentesis(value) {
         }
         if (count > 0 && (VAL.includes(global_expression.slice(-1)) || global_expression.slice(-1) == ")")) updateExpression(value)
     }
+    hideTable()
 }
 
 function clr() {
     global_expression = ""
     updateExpression("")
-    document.getElementById("table_content").innerHTML = "insira uma expressão"
     hideTable()
 }
 
 function del() {
     global_expression = global_expression.slice(0, -1)
     updateExpression("")
-    document.getElementById("table_content").innerHTML = "insira uma expressão"
     hideTable()
 }
 
@@ -61,11 +62,11 @@ function result() {
         if (global_expression[i] == ")") count--
     }
     if (count == 0 && !(OP.includes(global_expression.slice(-1))) && global_expression != "") {
-        // global_expression = "hello world!"
-        // updateExpression("")
-        let e = new Expression(global_expression)
-        printTable(e.table)
-        displayTable()
+        if (document.getElementById("table").style.display == "none") {
+            let e = new Expression(global_expression)
+            buildTableTag(e.table)
+            displayTable()
+        }
     }
 }
 
@@ -268,18 +269,33 @@ function displayTable() {
 
 function hideTable() {
     let item = document.getElementById("table")
+    document.getElementById("table_content").innerHTML = ""
     item.style.display = "none"
 }
 
-function printTable(m) {
-    let tableTag = document.getElementById("table_content")
-    tableTag.innerHTML = ""
+// function printTable(m) {
+//     let tableTag = document.getElementById("table_content")
+//     tableTag.innerHTML = ""
 
-    for (let i = 0; i < m.length; i++) {
-        for (let j = 0; j < m[i].length; j++) {
-            tableTag.innerHTML += `${m[i][j]}`
-            tableTag.innerHTML += " | "
-        }
-        tableTag.innerHTML += "<br>"
-    }
+//     for (let i = 0; i < m.length; i++) {
+//         for (let j = 0; j < m[i].length; j++) {
+//             tableTag.innerHTML += `${m[i][j]}`
+//             tableTag.innerHTML += " | "
+//         }
+//         tableTag.innerHTML += "<br>"
+//     }
+// }
+function buildTableTag(matrix) {
+    const tableTag = document.getElementById("table_content");
+    matrix.forEach((line, index) => {
+        const tr = document.createElement("tr");
+
+        line.forEach(cell => {
+            const item = index === 0 ? "th" : "td";
+            const td = document.createElement(item);
+            td.textContent = cell;
+            tr.appendChild(td);
+        })
+        tableTag.appendChild(tr);
+    })
 }
