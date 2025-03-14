@@ -18,32 +18,32 @@
                         <input type="button" value="B" onclick="addValue(value)">
                         <input type="button" value="C" onclick="addValue(value)">
                         <input type="button" value="D" onclick="addValue(value)">
-                        <input type="button" value="clr" onclick="clr()">
-                        <input type="button" value="del" onclick="del()">
+                        <input id="clr_button" type="button" value="clr" onclick="clr()">
+                        <input id="del_button" type="button" value="del" onclick="del()">
                     </div>
                     <div>
                         <input type="button" value="E" onclick="addValue(value)">
                         <input type="button" value="F" onclick="addValue(value)">
                         <input type="button" value="G" onclick="addValue(value)">
                         <input type="button" value="H" onclick="addValue(value)">
-                        <input type="button" value="true" onclick="addValue('1')">
-                        <input type="button" value="false" onclick="addValue('0')">
+                        <input id="true_button" type="button" value="true" onclick="addValue('1')">
+                        <input id="false_button" type="button" value="false" onclick="addValue('0')">
                     </div>
                     <div>
                         <input type="button" value="I" onclick="addValue(value)">
                         <input type="button" value="J" onclick="addValue(value)">
                         <input type="button" value="K" onclick="addValue(value)">
                         <input type="button" value="L" onclick="addValue(value)">
-                        <input type="button" value="(" onclick="addParentesis(value)">
-                        <input type="button" value=")" onclick="addParentesis(value)">
+                        <input id="op_button" type="button" value="(" onclick="addParentesis(value)">
+                        <input id="op_button" type="button" value=")" onclick="addParentesis(value)">
                     </div>
                     <div>
                         <input type="button" value="M" onclick="addValue(value)">
                         <input type="button" value="N" onclick="addValue(value)">
                         <input type="button" value="O" onclick="addValue(value)">
                         <input type="button" value="P" onclick="addValue(value)">
-                        <input type="button" value="→" onclick="addOperation(value)">
-                        <input type="button" value="↔" onclick="addOperation(value)">
+                        <input id="op_button" type="button" value="→" onclick="addOperation(value)">
+                        <input id="op_button" type="button" value="↔" onclick="addOperation(value)">
                     </div>
                     <div>
                         <input type="button" value="Q" onclick="addValue(value)">
@@ -51,20 +51,22 @@
                         <input type="button" value="S" onclick="addValue(value)">
                         <input type="button" value="T" onclick="addValue(value)">
                 
-                        <input type="button" value="∧" onclick="addOperation(value)">
-                        <input type="button" value="∨" onclick="addOperation(value)">
+                        <input id="op_button" type="button" value="∧" onclick="addOperation(value)">
+                        <input id="op_button" type="button" value="∨" onclick="addOperation(value)">
                     </div>
                     <div>
                         <input type="button" value="U" onclick="addValue(value)">
                         <input type="button" value="V" onclick="addValue(value)">
                         <input type="button" value="W" onclick="addValue(value)">
                         <input type="button" value="X" onclick="addValue(value)">
-                        <input type="button" value="¬" onclick="addOperation(value)">
-                        <input type="button" value="=" onclick="result()">
+                        <input id="op_button" type="button" value="¬" onclick="addOperation(value)">
+                        <input id="result_button" type="button" value="=" onclick="result()">
                     </div>
                     <div>
+                        <input class="invisible" type="button" value="_">
                         <input type="button" value="Y" onclick="addValue(value)">
                         <input type="button" value="Z" onclick="addValue(value)">
+                        <input class="invisible" type="button" value="_">
                     </div>
                 </div>
 
