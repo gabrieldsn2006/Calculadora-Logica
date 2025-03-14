@@ -64,6 +64,7 @@ input[type="button"] {
 
 input[type="button"]:hover {
     background: rgb(255, 190, 190);
+    cursor: pointer;
 }
 
 #true_button {
@@ -131,6 +132,7 @@ input[type="button"]:active {
     padding: 8px 8px 16px 8px;
     margin: 5px;
     margin-bottom: 10px;
+    border: 1px solid black;
 }
 
 #calculadora p::-webkit-scrollbar {
@@ -169,6 +171,11 @@ table {
     border-collapse: collapse;
     margin: 20px;
 }
+
+th {
+    background: lightgray;
+}
+
 th, td {
     border: 1px solid black;
     padding: 10px;
@@ -177,4 +184,9 @@ th, td {
 
 .item {
     flex: auto;
+}
+
+#type {
+    font-weight: bold;
+    text-align: center;
 }

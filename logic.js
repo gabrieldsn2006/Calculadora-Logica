@@ -66,6 +66,7 @@ function result() {
             let e = new Expression(global_expression)
             buildTableTag(e.table)
             displayTable()
+            displayType(e.type)
         }
     }
 }
@@ -87,11 +88,26 @@ class Node {
 class Expression {
     tree
     table
+    type
 
     constructor(expression) {
         this.tree = buildTree(expression)
         this.table = truthTable(expression, this.tree)
+        this.type = verifyType(this.table)
     }
+}
+
+function verifyType(matrix) {
+    let trueValues = 0
+    let total = 0
+    for (let i = 1; i < matrix.length; i++) {
+        if (matrix[i][matrix[0].length-1]) trueValues++
+        total++
+    }
+
+    if (trueValues == 0) return "Contradição."
+    if (trueValues == total) return "Tautologia."
+    return "Contigência."
 }
 
 function order(op) { /* retorna um valor de prioridade (comparar para saber qual resolver por último) */
@@ -285,4 +301,8 @@ function buildTableTag(matrix) {
         })
         tableTag.appendChild(tr);
     })
+}
+
+function displayType(type) {
+    document.getElementById("type").innerHTML = type
 }
