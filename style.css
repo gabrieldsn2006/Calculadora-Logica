@@ -107,6 +107,8 @@ input[type="button"] {
     display: none;
     border-radius: 10px;
     overflow: scroll;
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
 #table::-webkit-scrollbar {
