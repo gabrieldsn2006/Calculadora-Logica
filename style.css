@@ -69,6 +69,7 @@ input[type="button"] {
 
 #result_button {
     background: rgb(175, 200, 255);
+    width: 104px;
 }
 
 .invisible {

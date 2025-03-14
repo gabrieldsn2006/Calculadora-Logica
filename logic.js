@@ -1,7 +1,7 @@
 /* ETAPA I */
 
 VAL = ["Q","W","E","R","T","Y","U","I","O","P","A","S","D","F","G","H","J","K","L","Z","X","C","V","B","N","M","1","0"]
-OP = ["¬","∧","∨","→","↔"]
+OP = ["¬","∧","∨","→","↔","⊻"]
 
 global_expression = ""
 
@@ -95,7 +95,7 @@ class Expression {
 
 function order(op) { /* retorna um valor de prioridade (comparar para saber qual resolver por último) */
     if (op == "¬") return 2
-    if (op == "∧" || op == "∨") return 1
+    if (op == "∧" || op == "∨" || op == "⊻") return 1
     if (op == "→" || op == "↔") return 0
 }
 
@@ -211,6 +211,9 @@ function solve(tree, entries) { /* retorna a boolean da expressão para um conju
     }
     if (tree.value == "↔") {
         return (solve(tree.left, entries) == solve(tree.right, entries))
+    }
+    if (tree.value == "⊻") {
+        return (solve(tree.left, entries) != solve(tree.right, entries))
     }
 }
 
