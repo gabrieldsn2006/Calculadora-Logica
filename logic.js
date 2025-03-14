@@ -260,7 +260,6 @@ function truthTable(expression, tree) { /* retorna matriz que representa a tabel
 
 
 /* FRONT-END TABLE */
-/* table_content */
 
 function displayTable() {
     let item = document.getElementById("table")
@@ -273,18 +272,6 @@ function hideTable() {
     item.style.display = "none"
 }
 
-// function printTable(m) {
-//     let tableTag = document.getElementById("table_content")
-//     tableTag.innerHTML = ""
-
-//     for (let i = 0; i < m.length; i++) {
-//         for (let j = 0; j < m[i].length; j++) {
-//             tableTag.innerHTML += `${m[i][j]}`
-//             tableTag.innerHTML += " | "
-//         }
-//         tableTag.innerHTML += "<br>"
-//     }
-// }
 function buildTableTag(matrix) {
     const tableTag = document.getElementById("table_content");
     matrix.forEach((line, index) => {
