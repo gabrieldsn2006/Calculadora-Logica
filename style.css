@@ -62,9 +62,17 @@ input[type="button"] {
     border-radius: 5px;
 }
 
+input[type="button"]:hover {
+    background: rgb(255, 190, 190);
+}
+
 #true_button {
     color: white;
     background: rgb(90, 220, 90);
+}
+
+#true_button:hover {
+    background: rgb(45, 255, 45);
 }
 
 #false_button {
@@ -72,28 +80,37 @@ input[type="button"] {
     color: white;
     background: rgb(220, 90, 90);
 }
-
-#clr_button {
-    font-weight: bold;
-    /* color: white; */
-    /* background: rgb(255, 190, 190); */
-    background: rgb(160, 160, 220);
+#false_button:hover {
+    background: rgb(255, 45, 45);
 }
 
-#del_button {
+#clr_button, #del_button {
     font-weight: bold;
-    /* color: white; */
-    /* background: rgb(255, 190, 190); */
     background: rgb(160, 160, 220);
+}
+#clr_button:hover, #del_button:hover {
+    background: rgb(130, 130, 255);
 }
 
 #op_button {
     background: rgb(230, 225, 255);
 }
+#op_button:hover {
+    background: rgb(225, 200, 255);
+}
 
 #result_button {
     background: rgb(175, 200, 255);
     width: 104px;
+}
+#result_button:hover {
+    background: rgb(150, 165, 255);
+}
+
+input[type="button"]:active {
+    transform: scale(0.90);
+    background: black !important;
+    color: white;
 }
 
 .invisible {
