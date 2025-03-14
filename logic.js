@@ -63,7 +63,8 @@ function result() {
     if (count == 0 && !(OP.includes(global_expression.slice(-1))) && global_expression != "") {
         // global_expression = "hello world!"
         // updateExpression("")
-        printTable( (new Expression(global_expression)).table )
+        let e = new Expression(global_expression)
+        printTable(e.table)
         displayTable()
     }
 }
@@ -251,6 +252,8 @@ function truthTable(expression, tree) { /* retorna matriz que representa a tabel
 
     return matrix
 }
+
+
 
 /* FRONT-END TABLE */
 /* table_content */
