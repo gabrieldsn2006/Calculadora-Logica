@@ -10,6 +10,7 @@ function expressionToString(expression) {
 }
 
 function updateExpression(str) {
+    hideTable()
     global_expression += str
     document.getElementById("label").innerHTML = expressionToString(global_expression)
 }
@@ -18,14 +19,12 @@ function addValue(value) {
     if (global_expression != "") {
         if (OP.includes(global_expression.slice(-1)) || global_expression.slice(-1) == "(") updateExpression(value)
     } else updateExpression(value)
-    hideTable()
 }
 
 function addOperation(value) {   
     if (value == "¬") {
         if (global_expression.slice(-1) == "(" || (OP.includes(global_expression.slice(-1)) && global_expression.slice(-1) != "¬") || global_expression == "") updateExpression(value)
     } else if (global_expression.slice(-1) == ")" || VAL.includes(global_expression.slice(-1))) updateExpression(value)
-    hideTable()
 }
 
 function addParentesis(value) {
@@ -40,19 +39,16 @@ function addParentesis(value) {
         }
         if (count > 0 && (VAL.includes(global_expression.slice(-1)) || global_expression.slice(-1) == ")")) updateExpression(value)
     }
-    hideTable()
 }
 
 function clr() {
     global_expression = ""
     updateExpression("")
-    hideTable()
 }
 
 function del() {
     global_expression = global_expression.slice(0, -1)
     updateExpression("")
-    hideTable()
 }
 
 function result() {
