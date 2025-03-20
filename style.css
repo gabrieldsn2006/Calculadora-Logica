@@ -151,7 +151,7 @@ input[type="button"]:active {
 }
 
 #table {
-    max-width: 500px;
+    max-width: 600px;
     max-height: 441.6px;
     font-family: "JetBrains Mono", monospace;
     border: 1px solid black;
