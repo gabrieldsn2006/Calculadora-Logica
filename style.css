@@ -121,7 +121,7 @@ input[type="button"]:active {
 
 #label {
     scroll-behavior: auto;
-    max-width: 305px;
+    max-width: 300px;
     overflow-x: auto;
     white-space: nowrap;
 
