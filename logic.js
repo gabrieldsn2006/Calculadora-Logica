@@ -93,7 +93,7 @@ class Expression {
     }
 }
 
-function verifyType(matrix) {
+function verifyType(matrix) { /* verifica se é tautologia, contradição ou contigência */
     let trueValues = 0
     let total = 0
     for (let i = 1; i < matrix.length; i++) {
