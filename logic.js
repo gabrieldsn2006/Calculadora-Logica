@@ -1,4 +1,4 @@
-/* ETAPA I */
+/* ETAPA I - SINTAXE */
 
 VAL = ["Q","W","E","R","T","Y","U","I","O","P","A","S","D","F","G","H","J","K","L","Z","X","C","V","B","N","M","1","0"]
 OP = ["¬","∧","∨","→","↔","⊻"]
@@ -69,7 +69,7 @@ function result() {
 
 
 
-/* ETAPA II */
+/* ETAPA II - ESTRUTURA DE UMA EXPRESSÃO */
 
 
 
@@ -199,7 +199,7 @@ function buildTree(expression) { /* retorna o Node raiz (arvore) */
 
 
 
-/* ETAPA III */
+/* ETAPA III - RESOLVENDO EXPRESSÃO */
 
 
 
