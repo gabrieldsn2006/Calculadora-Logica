@@ -69,7 +69,7 @@ function result() {
 
 
 
-/* ETAPA II - ESTRUTURA DE UMA EXPRESSÃO */
+/* ETAPA II - ESTRUTURA DA EXPRESSÃO */
 
 
 
