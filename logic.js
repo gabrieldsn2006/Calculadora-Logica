@@ -145,7 +145,7 @@ function findRoot(expression) { /* retorna index da raiz (ultima operação a se
     return rootIndex
 }
 
-function sliceParentesis(expression) { /* retorna expressão sem o parentesis mais externo se possível (talvez possa ser otimizada) */
+function sliceParentesis(expression) { /* retorna expressão sem o parentesis mais externo se possível */
     let index = findRoot(expression)
 
     if (index == -1) {
