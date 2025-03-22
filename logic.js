@@ -93,19 +93,6 @@ class Expression {
     }
 }
 
-function verifyType(matrix) { /* verifica se é tautologia, contradição ou contigência */
-    let trueValues = 0
-    let total = 0
-    for (let i = 1; i < matrix.length; i++) {
-        if (matrix[i][matrix[0].length-1]) trueValues++
-        total++
-    }
-
-    if (trueValues == 0) return "Contradição."
-    if (trueValues == total) return "Tautologia."
-    return "Contigência."
-}
-
 function order(op) { /* retorna um valor de prioridade (comparar para saber qual resolver por último) */
     if (op == "¬") return 2
     if (op == "∧" || op == "∨" || op == "⊻") return 1
@@ -267,6 +254,19 @@ function truthTable(expression, tree) { /* retorna matriz que representa a tabel
     matrix[0].push(expressionToString(expression))
 
     return matrix
+}
+
+function verifyType(matrix) { /* verifica se é tautologia, contradição ou contigência */
+    let trueValues = 0
+    let total = 0
+    for (let i = 1; i < matrix.length; i++) {
+        if (matrix[i][matrix[0].length-1]) trueValues++
+        total++
+    }
+
+    if (trueValues == 0) return "Contradição."
+    if (trueValues == total) return "Tautologia."
+    return "Contigência."
 }
 
 
