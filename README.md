@@ -14,6 +14,10 @@ Desenvolvi esse projeto enquanto estudava a disciplina de Resolução de Problem
 
 <hr>
 
+<p align="center"><img src="./Captura-de-tela.png" width=500px></p>
+
+<hr>
+
 acesse a página: [https://gabrieldsn2006.github.io/Calculadora-Logica/](https://gabrieldsn2006.github.io/Calculadora-Logica/)
 
 <hr>
